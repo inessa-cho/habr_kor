@@ -1,0 +1,21 @@
+services:
+  habr-translator:
+    build: .
+    container_name: habr-madlad-openai-pwa
+    network_mode: host
+    environment:
+      APP_PORT: ${APP_PORT:-8010}
+      MADLAD_MODEL: ${MADLAD_MODEL:-google/madlad400-3b-mt}
+      MADLAD_MODEL_DIR: ${MADLAD_MODEL_DIR:-/models/madlad400-3b-mt-int8}
+      MADLAD_TARGET_PREFIX: ${MADLAD_TARGET_PREFIX:-<2ko>}
+      MADLAD_BEAM_SIZE: ${MADLAD_BEAM_SIZE:-4}
+      MADLAD_CPU_THREADS: ${MADLAD_CPU_THREADS:-3}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?OPENAI_API_KEY must be set in .env}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4.1-mini}
+      OPENAI_BATCH_SIZE: ${OPENAI_BATCH_SIZE:-8}
+      OPENAI_MAX_RETRIES: ${OPENAI_MAX_RETRIES:-3}
+      OPENAI_TIMEOUT_SECONDS: ${OPENAI_TIMEOUT_SECONDS:-120}
+    volumes:
+      - ./data:/data
+      - ./models:/models
+    restart: unless-stopped

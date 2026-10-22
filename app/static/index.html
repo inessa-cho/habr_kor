@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#5aaeff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Хабр Kor">
+  <link rel="manifest" href="/static/manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/public/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/public/icon-512.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+  <link rel="stylesheet" href="/static/app.css?v=12">
+  <title>Хабр Kor</title>
+</head>
+<body>
+<main id="app">
+  <section class="view active" data-view="url"><h1>Habr URL</h1><form id="url-form"><input id="url" type="url" inputmode="url" placeholder="https://habr.com/ru/articles/1062402/" required><button>저장 및 번역</button><p id="message"></p></form></section>
+  <section class="view" data-view="pending"><h1>Pending</h1><div id="pending-list" class="list"></div></section>
+  <section class="view" data-view="complete"><h1>Complete</h1><div id="complete-list" class="list"></div></section>
+</main>
+<nav><button class="active" data-tab="url">URL</button><button data-tab="pending">Pending</button><button data-tab="complete">Complete</button></nav>
+<script src="/static/app.js?v=12"></script>
+</body>
+</html>
