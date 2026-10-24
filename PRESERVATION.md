@@ -21,3 +21,11 @@ Implementation claims are based on source inspection. No fresh dependency instal
 ## Git and upload
 
 No usable root Git history was available in the inspected project. Internal metadata must not be uploaded. A new local history, if created, does not reconstruct prior history. The owner approved initial Private repository creation and Push on 2026-10-23. The separate closure report records the verified upload outcome.
+
+## Portfolio review — 2026-10-24
+
+Development and maintenance remain discontinued; this presentation update does not restart development. No functionality, dependencies, original server files or historical results were changed.
+
+The owner authorized public publication after review and confirmed direct creation of the app icons and CaseTrace practice content. Existing server account paths were explicitly approved for disclosure. No project-wide license has been assigned; dependency licenses and third-party notices remain separate.
+
+The approved publication scope excludes original external media, downloaded content and model weights. The historical private-preservation notes above describe the earlier stage.

@@ -1,5 +1,7 @@
 # Хабр Kor — MADLAD + GPT-4.1 mini
 
+A personal web app that translates Russian Habr articles into Korean with MADLAD and GPT post-editing.
+
 Habr 러시아어 게시글을 한국어로 번역해 보관하는 개인용 PWA입니다.
 
 ## 파이프라인
@@ -92,12 +94,12 @@ API에는 러시아어 원문과 MADLAD 한국어 초안이 모두 입력되므�
 취소하면 URL은 등록되지 않으며, 확인하면 기존과 동일하게 즉시 번역을 시작합니다.
 
 
-## Preservation implementation notes
+## Implementation notes
 
-The active worker uses MADLAD followed by openai_editor.refine_batch. The separate older polisher module is retained as legacy code, not presented as the active workflow. Source HTML, translations, SQLite data, model weights and real API keys are excluded. No paid API request or translation job was run.
+The active worker uses MADLAD followed by openai_editor.refine_batch. The separate older polisher module is retained as an earlier implementation, not presented as the active workflow. Source HTML, translations, SQLite data, model weights and real API keys are excluded. No paid API request or translation job was run.
 
-## Maintenance status
+## Content and models
 
-Development and maintenance are discontinued. This is a preservation snapshot, not a new release or feature-development plan. Running services and scheduled jobs are not automatically shut down by this status.
+No Habr article bodies, translations, downloaded article images, database or model weights are included. Fetching or sharing articles and translations requires permission under the applicable content terms; publishing this application does not grant rights to that content.
 
-This repository is intended for Private preservation. Public release requires a separate review and approval. See PRESERVATION.md for excluded material and verification limits.
+See [PRESERVATION.md](PRESERVATION.md) for the maintenance record, excluded files and verification scope.
