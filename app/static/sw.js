@@ -1,8 +1,8 @@
-const CACHE = "habr-madlad-openai-v12";
+const CACHE = "habr-madlad-openai-v13";
 const ASSETS = [
   "/",
-  "/static/app.css?v=12",
-  "/static/app.js?v=12",
+  "/static/app.css?v=13",
+  "/static/app.js?v=13",
   "/static/manifest.webmanifest",
   "/public/icon-192.png",
   "/public/icon-512.png",

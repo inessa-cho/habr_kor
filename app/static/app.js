@@ -1,5 +1,10 @@
 const views=[...document.querySelectorAll('.view')], tabs=[...document.querySelectorAll('[data-tab]')];
 let optimisticPending=[];
+const fittedJobs=new Set();
+function fitted(id){
+  try{return fittedJobs.has(String(id))||localStorage.getItem(`habr-kor:fit:${id}`)==='1'}catch{return fittedJobs.has(String(id))}
+}
+
 function show(name){views.forEach(v=>v.classList.toggle('active',v.dataset.view===name));tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===name));if(name!=='url')load(name)}
 tabs.forEach(t=>t.onclick=()=>show(t.dataset.tab));
 const statusLabel={pending:'대기 중',translating:'MADLAD 번역 중',refining:'GPT-4.1 mini 후편집 중',complete:'완료',error:'오류',running:'처리 중'};
@@ -11,7 +16,7 @@ function card(j){
   const total=j.total_nodes??0;
   const refined=j.refined_nodes??0;
   const fallback=j.fallback_nodes??0;
-  return `<article class="card"><h2>${escapeHtml(j.url)}</h2><div class="status ${escapeHtml(j.status)}">${escapeHtml(statusLabel[j.status]||j.status)}</div>${progress('1단계 · MADLAD 초벌 번역',tp,j.done_nodes??0,total,'translation')}${progress('2단계 · GPT-4.1 mini 원문 대조 후편집',rp,refined,total,'refinement')}${fallback?`<div class="fallback">API 후편집 실패 ${fallback}개 노드는 MADLAD 결과를 유지했습니다.</div>`:''}${j.error?`<div class="error">${escapeHtml(j.error)}</div>`:''}<div class="actions"><a href="/api/jobs/${j.id}/original" target="_blank">원본</a>${done?`<a href="/api/jobs/${j.id}/translated" target="_blank">번역본</a>`:''}</div></article>`
+  return `<article class="card${done&&fitted(j.id)?' fitted':''}" data-job-id="${escapeHtml(j.id)}"><h2>${escapeHtml(j.url)}</h2><div class="status ${escapeHtml(j.status)}">${escapeHtml(statusLabel[j.status]||j.status)}</div>${progress('1단계 · MADLAD 초벌 번역',tp,j.done_nodes??0,total,'translation')}${progress('2단계 · GPT-4.1 mini 원문 대조 후편집',rp,refined,total,'refinement')}${fallback?`<div class="fallback">API 후편집 실패 ${fallback}개 노드는 MADLAD 결과를 유지했습니다.</div>`:''}${j.error?`<div class="error">${escapeHtml(j.error)}</div>`:''}<div class="actions"><a href="/api/jobs/${j.id}/original" target="_blank">원본</a>${done?`<a href="/api/jobs/${j.id}/translated" target="_blank">번역본</a><button type="button" class="fit-button" aria-pressed="${fitted(j.id)}">화면 맞춤</button>`:''}</div></article>`
 }
 function escapeHtml(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function render(name,jobs){document.querySelector(`#${name}-list`).innerHTML=jobs.length?jobs.map(card).join(''):'<p class="meta">항목 없음</p>'}
@@ -63,5 +68,14 @@ document.querySelector('#url-form').onsubmit=async e=>{
     show('pending');
   }catch(err){msg.textContent=`요청 실패: ${err.message}`}
 };
+document.querySelector('#complete-list').addEventListener('click',event=>{
+  const button=event.target.closest('.fit-button');
+  if(!button)return;
+  const box=button.closest('.card'),id=box.dataset.jobId;
+  fittedJobs.add(id);
+  try{localStorage.setItem(`habr-kor:fit:${id}`,'1')}catch{/* Keep this tab's preference if storage is blocked. */}
+  box.classList.add('fitted');button.setAttribute('aria-pressed','true');
+  window.open(`/static/fit.html?job=${encodeURIComponent(id)}`,'_blank','noopener,noreferrer');
+});
 setInterval(()=>{const active=document.querySelector('.view.active')?.dataset.view;if(active==='pending'||active==='complete')load(active)},2500);
-if('serviceWorker' in navigator)navigator.serviceWorker.register('/static/sw.js?v=12').then(reg=>reg.update()).catch(()=>{});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('/static/sw.js?v=13').then(reg=>reg.update()).catch(()=>{});

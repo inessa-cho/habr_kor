@@ -103,3 +103,9 @@ The active worker uses MADLAD followed by openai_editor.refine_batch. The separa
 No Habr article bodies, translations, downloaded article images, database or model weights are included. Fetching or sharing articles and translations requires permission under the applicable content terms; publishing this application does not grant rights to that content.
 
 See [PRESERVATION.md](PRESERVATION.md) for the maintenance record, excluded files and verification scope.
+
+## Complete 화면 맞춤
+
+Complete의 각 작업 박스에 있는 **화면 맞춤** 버튼은 기존 번역 HTML을 별도 읽기 화면으로 엽니다. 박스 안에 번역 본문을 삽입하지 않습니다. 자체 CSS로 어두운 회색 배경과 밝은 글자, 읽기 좋은 본문 폭을 적용하며 외부 Habr CSS에 의존하지 않습니다. 가로 화면에서는 이미지를 본문보다 조금 작게, 세로 화면에서는 추가 축소 없이 표시하고 이미지 비율과 창 크기 변경에 자동 대응합니다.
+
+적용 표시는 작업별로 현재 브라우저의 localStorage에 저장되어 새로고침 후 유지됩니다. 재클릭해도 해제되지 않으며, 저장소가 차단된 경우 현재 탭에서만 표시가 유지됩니다. 다른 작업 박스, 기존 원본·번역본 링크, 저장된 HTML 및 번역 파이프라인은 변경하지 않습니다.

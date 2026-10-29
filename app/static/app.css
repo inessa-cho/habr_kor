@@ -2,3 +2,7 @@
 
 .bar{position:relative}.bar>b{position:absolute;top:0;bottom:0;border-radius:999px;background:repeating-linear-gradient(135deg,rgba(114,85,181,.28) 0 8px,rgba(114,85,181,.58) 8px 16px);background-size:24px 24px;animation:batchMove .8s linear infinite}.batch-note{margin-top:-2px;margin-bottom:10px;color:#6741a5;font-weight:600}@keyframes batchMove{from{background-position:0 0}to{background-position:24px 0}}
 .bar.refinement>i{background:#3266d6}.status.refining{background:#eef1ff;color:#3d4fa3}.fallback{margin:10px 0;color:#9a5a1f;font-size:13px}
+
+/* Per-job reader shortcut; the original result links remain unchanged. */
+.card{min-width:0}.actions{flex-wrap:wrap}.fit-button{flex:1;white-space:nowrap;border:0;border-radius:10px;padding:10px;background:#eee;color:#111;font-size:14px;cursor:pointer}.fit-button:focus-visible{outline:3px solid #77b7ff;outline-offset:3px}
+.card.fitted{background:#292b2f;color:#dedee3;border-color:#494c52}.fitted .progress-head,.fitted .meta{color:#c4c6cd}.fitted .fallback{color:#efc58f}.fitted .error{color:#ffb4b4}.fitted .actions a,.fitted .fit-button{background:#3c4047;color:#c4dfff}.fitted .bar{background:#484c55}.fitted .bar>i{background:#a3abbc}.fitted .bar.refinement>i{background:#7dacf7}
