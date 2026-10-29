@@ -27,8 +27,27 @@
       if(element.tagName==='A'){element.setAttribute('target','_blank');element.setAttribute('rel','noopener noreferrer')}
       if(element.tagName==='IMG')element.setAttribute('referrerpolicy','no-referrer');
     }
+    // Render the saved TeX verbatim; never recolor images or repair guessed notation.
+    for(const image of article.querySelectorAll('img.formula')){
+      const source=image.getAttribute('source')||image.getAttribute('alt');
+      if(!source)continue;
+      const inline=image.classList.contains('inline'),formula=doc.createElement('span');
+      formula.className=`math-formula${inline?' math-inline':' math-block'}`;
+      formula.tabIndex=0;
+      try{
+        formula.innerHTML=katex.renderToString(source,{
+          output:'mathml',displayMode:!inline,throwOnError:true,strict:'ignore',
+          trust:false,maxSize:20,maxExpand:1000,
+        });
+      }catch{
+        // Unsupported or malformed input remains visible without inventing a formula.
+        formula.classList.add('math-source');formula.textContent=source;
+        formula.title='원문 수식: 자동 렌더링할 수 없어 저장된 문자열을 그대로 표시합니다.';
+      }
+      image.replaceWith(formula);
+    }
     // A script-free sandbox and independent CSS replace unavailable captured Habr CSS.
-    frame.srcdoc=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src https: data:; font-src 'none'; script-src 'none'; base-uri 'none'; form-action 'none'"><link rel="stylesheet" href="${location.origin}/static/fit.css?v=13"></head><body>${article.outerHTML}</body></html>`;
+    frame.srcdoc=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src https: data:; font-src 'none'; script-src 'none'; base-uri 'none'; form-action 'none'"><link rel="stylesheet" href="${location.origin}/static/fit.css?v=14"></head><body>${article.outerHTML}</body></html>`;
     frame.hidden=false;message.hidden=true;
     try{localStorage.setItem(`habr-kor:fit:${id}`,'1')}catch{/* The reader remains fitted even without browser storage. */}
   }catch(error){message.textContent=`번역 결과를 열 수 없습니다: ${error.message}`}

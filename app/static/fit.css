@@ -2,3 +2,9 @@
 *{box-sizing:border-box;min-width:0;max-width:100%}body{margin:0;padding:24px 16px}body>article,body>.tm-article-body,body>#post-content-body{max-width:70ch;margin:auto}h1,h2,h3,h4{line-height:1.4;margin:1.2em 0 .6em}h1{font-size:1.6em}h2{font-size:1.35em}a{color:#9ecbff;text-decoration:underline}img{display:block;max-width:100%;height:auto;margin:16px auto;object-fit:contain}figure{margin:16px 0}figcaption,small{color:#bcc2cd}pre,code,kbd,samp{background:#1e2024;color:#e3e5eb;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-radius:4px}pre{padding:12px}table{width:100%;table-layout:fixed;border-collapse:collapse}th,td{width:auto;border:1px solid #62666e;padding:8px;overflow-wrap:anywhere}th{background:#383c43}blockquote{margin:16px 0;padding:4px 14px;border-left:3px solid #8396b4;color:#ccd0d8}ul,ol{padding-left:24px}mark{background:#685b29;color:#fff3bf}svg{height:auto}a:focus-visible{outline:2px solid #9ecbff;outline-offset:3px}
 @media(orientation:landscape){img{max-width:90%}}
 body.reader-shell{padding:0;height:100vh;height:100dvh;overflow:hidden}#reader{display:block;width:100%;height:100%;border:0}#reader[hidden],[hidden]{display:none}#message{margin:24px}
+
+/* Native MathML inherits text color; photographs and stored formula images stay untouched. */
+.math-formula{max-width:100%;overflow-x:auto;overflow-y:hidden;color:#dedee3;white-space:nowrap;overflow-wrap:normal;word-break:normal;padding:4px 0}
+.math-inline{display:inline-block;vertical-align:middle;margin:0 .1em}.math-block{display:block;text-align:center;margin:1em 0}
+.math-formula .katex,.math-formula math{display:inline-block;max-width:none}.math-formula math *{max-width:none;color:inherit!important}.math-formula math{color:inherit!important;font-family:math}
+.math-source{font-family:monospace;text-align:left;white-space:pre}.math-formula:focus-visible{outline:2px solid #9ecbff;outline-offset:-2px}
